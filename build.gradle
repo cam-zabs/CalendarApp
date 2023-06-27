@@ -9,22 +9,23 @@ plugins {
 
 checkstyle {
     toolVersion = '10.10.0'
-    configFile = 'config/checkstyle/checkstyle-guide.xml' as File
+    configFile = 'config/checkstyle/cs3500-checkstyle.xml' as File
 }
 
 application {
-    mainModule = 'starterCode'
-    mainClass = 'starterCode.Driver'
+    mainModule = 'cs3500.pa05'
+    mainClass = 'cs3500.pa05.Driver'
 }
 
+// JaCoCo for code coverage
 test {
-    finalizedBy jacocoTestReport
+    finalizedBy jacocoTestReport // generate report after code coverage test
 }
 jacocoTestReport {
-    dependsOn test
+    dependsOn test // make sure that test task run before reports are run.
 }
 
-group 'personalLibrary'
+group 'cs3500.pa05'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -35,6 +36,9 @@ ext {
     junitVersion = '5.9.2'
 }
 
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
 
 javafx {
     version = '20.0.1'
@@ -45,13 +49,16 @@ dependencies {
     // Jackson
     implementation("com.fasterxml.jackson.core:jackson-databind:2.15.0")
 
+
     // JavaFX
     implementation('org.controlsfx:controlsfx:11.1.2')
-    implementation 'org.jetbrains:annotations:24.0.0'
+
 
     // JUnit
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 
     // TestFX
     testImplementation 'org.testfx:testfx-core:4.0.16-alpha'
